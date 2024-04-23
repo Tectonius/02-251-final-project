@@ -1,10 +1,5 @@
-import Bio
-from Bio.Align.Applications import ClustalwCommandline
-from Bio.Align.Applications import DialignCommandline
 from Bio import AlignIO
-from Bio import SeqIO
 import blosum as bl
-import subprocess
 import math
 import time
 import os
@@ -26,7 +21,7 @@ def aligner_done(file_path):
         return False
 
 
-def f_scoring(path_to_sequence_file, path_to_aligner, params, ref_alignment):
+def f_scoring(path_to_sequence_file, path_to_aligner, params, ref_alignment_path):
     '''
     path_to_sequence_file: path to the unaligned sequence in fasta format
     path_to_clustal: path to the aligner
@@ -60,12 +55,11 @@ def f_scoring(path_to_sequence_file, path_to_aligner, params, ref_alignment):
         alignment.append(str(rec.seq))
 
     # Get the reference alignment
-    ref_aln = AlignIO.read(ref_alignment, 'fasta')
+    ref_aln = AlignIO.read(ref_alignment_path, 'fasta')
 
     ref_alignment = []
     for rec in ref_aln:
         ref_alignment.append(str(rec.seq))
-    ref_alignment = [ref_alignment[19], ref_alignment[16], ref_alignment[7]]###
 
     sp_diff = SP_Score_Diff(alignment, ref_alignment, s_matrix, gop, gep)
     return sp_diff/len(ref_alignment[0])
@@ -181,9 +175,9 @@ def test_f_scoring(path_to_sequence_file, path_to_aligner, ref_alignment, aligne
     sp_diff = SP_Score_Diff(alignment, ref_alignment, s_matrix, gop, gep)
     return sp_diff / len(ref_alignment[0])
 
-aligner = "clustalw"
-path_to_aligner = r'..\ClustalW2\clustalw2.exe'
-path_to_sequence_file = r'"2022_03_07_first_3.fasta"'
-ref_alignment = r'"2022_03_07_A.fasta"'
-
-print(test_f_scoring(path_to_sequence_file, path_to_aligner, ref_alignment, aligner))
+# aligner = "clustalw"
+# path_to_aligner = r'..\ClustalW2\clustalw2.exe'
+# path_to_sequence_file = r'"2022_03_07_first_3.fasta"'
+# ref_alignment = r'"2022_03_07_A.fasta"'
+#
+# print(test_f_scoring(path_to_sequence_file, path_to_aligner, ref_alignment, aligner))
