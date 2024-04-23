@@ -1,6 +1,0 @@
-2024-04-17 01:07:28,895 - pyswarms.single.global_best - INFO - Optimize for 8 iters with {'c1': [1, 2, 3], 'c2': [1, 2, 3], 'w': [2, 3, 5], 'k': [5, 10, 15], 'p': 1}
-2024-04-17 03:16:17,519 - pyswarms.single.global_best - INFO - Optimize for 8 iters with {'c1': 0.5, 'c2': 0.5, 'w': 0.9}
-2024-04-17 12:12:19,553 - pyswarms.single.global_best - INFO - Optimize for 8 iters with {'c1': 0.5, 'c2': 0.5, 'w': 0.9}
-2024-04-17 12:13:09,530 - pyswarms.single.global_best - INFO - Optimize for 8 iters with {'c1': 0.5, 'c2': 0.5, 'w': 0.9}
-2024-04-17 13:21:42,412 - pyswarms.single.global_best - INFO - Optimize for 8 iters with {'c1': 0.5, 'c2': 0.5, 'w': 0.9}
-2024-04-17 17:58:13,655 - pyswarms.single.global_best - INFO - Optimization finished | best cost: 486496.0, best pos: [7.90637735e+01 6.55090051e+01 9.57922256e+01 4.06578832e-02]

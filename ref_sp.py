@@ -59,3 +59,5 @@ def reference_based_SP_Score(ref_alignment_name, alignment_name):
         col += 1
 
     return total_recovered / total_pairs
+
+print(reference_based_SP_Score(r".\2022_03_07_A.fasta", r"optimized_first_3_aligned.aln"))
