@@ -77,7 +77,7 @@ def run_aligner(path_to_sequence_file, path_to_aligner, params, output_alignment
         pass
     os.system(cwAln)
     time.sleep(0.5)
-    wait_until(aligner_done, 100000000, "aligned.aln", period=0.1)
+    wait_until(aligner_done, 100000000, f"{output_alignment_name}.aln", period=0.1)
 
 
 

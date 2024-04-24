@@ -4,13 +4,6 @@ from f_scoring import f_scoring
 import time
 from f_scoring import run_aligner
 
-path_to_aligner = r'..\ClustalW2\clustalw2.exe'
-path_to_sequence_file = r'"ox_8_seqs.fasta"'
-ref_alignment = r'ox_8_ref_align.fasta' # shouldn't include quotes
-iter_ = 0
-true_start = time.time()
-best_params = None
-best_params_score = None
 
 
 def wait_until(somepredicate, timeout, output_file, period=0.25):
@@ -36,7 +29,7 @@ def append_to_file(text, file_name):
             file.write(text + '\n')
 
 
-def optimize_clustal(path_to_aligner, path_to_sequence_file, ref_alignment, logname):
+def optimize_clustal(path_to_aligner, path_to_sequence_file, ref_alignment, logname, final_output_name):
     def clustalscore(params):
         # input: params is a numpy.ndarray
         # set of inputs of shape :code:`(n_particles, dimensions)`
@@ -67,12 +60,30 @@ def optimize_clustal(path_to_aligner, path_to_sequence_file, ref_alignment, logn
         options = {'c1': 0.5,
                    'c2': 0.5,
                    'w': 0.9}
-        optimizer = ps.single.GlobalBestPSO(n_particles=5, dimensions=4, options=options, bounds=bounds)
-        best_position, _ = optimizer.optimize(clustalscore, iters=10)
+        optimizer = ps.single.GlobalBestPSO(n_particles=25, dimensions=4, options=options, bounds=bounds)
+        best_position, _ = optimizer.optimize(clustalscore, iters=50)
         run_aligner(path_to_sequence_file, path_to_aligner, best_params, output_alignment_names)
         return best_position
 
-    print(f"covid params: {optimize_params('ox_final_alignment')}")
+    print(f"covid params: {optimize_params(final_output_name)}")
 
 
-optimize_clustal(path_to_aligner, path_to_sequence_file, ref_alignment, "ox_alignment_log")
+
+def run_pso(path_to_aligner, path_to_sequence_file_list, ref_alignment_list, log_name_list, final_output_name_list):
+    for i in range(len(path_to_sequence_file_list)):
+        optimize_clustal(path_to_aligner, path_to_sequence_file_list[i], ref_alignment_list[i], log_name_list[i], final_output_name_list[i])
+
+
+path_to_aligner = r'..\ClustalW2\clustalw2.exe'
+path_to_sequence_file_list = ['"1a0cA_1a0dA.fasta"', '"1aab_ref1.fasta"', '"BB11001.fasta"', '"sup_002.fasta"']
+ref_alignment_list = ['1a0cA_1a0dA_ref_align.fasta', '1aab_ref1_ref_align.fasta', 'BB11001_ref_align.fasta', 'sup_002_ref_align.fasta'] # shouldn't include quotes
+log_name_list = ["1a0cA_1a0dA_log", "1aab_ref1_log", "BB11001_log", "sup_002_log"]
+final_output_name_list = ["1a0cA_1a0dA_final", "1aab_ref1_final", "BB11001_final", "sup_002_final"]
+iter_ = 0
+true_start = time.time()
+best_params = None
+best_params_score = None
+
+run_pso(path_to_aligner, path_to_sequence_file_list, ref_alignment_list, log_name_list, final_output_name_list)
+
+
