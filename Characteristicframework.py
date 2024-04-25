@@ -1,5 +1,6 @@
 import numpy as np
 from collections import Counter
+import math
 
 
 def calculate_aa_percentages(sequences):
@@ -36,7 +37,7 @@ def kimura_distance(sequences):
             t_sites = sum(1 for a, b in zip(seq1, seq2) if a != '-' and b != '-')
             p = d_sites / t_sites
 
-            D = -np.log(1 - p - 0.2 * p ** 2)
+            D = -np.log(max(0.000001, 1 - p - 0.2 * p ** 2))
             distances.append(D)
 
     mean_distance = np.mean(distances)

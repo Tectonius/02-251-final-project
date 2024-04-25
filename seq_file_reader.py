@@ -20,4 +20,6 @@ def seq_file_reader(filename):
     sequences = []
     for rec in seqs:
         sequences.append(str(rec.seq))
+    if len(sequences) == 0:
+        print(filename)
     return sequences
