@@ -71,10 +71,6 @@ def run_aligner(path_to_sequence_file, path_to_aligner, params, output_alignment
     cwAln += f' -outfile="{output_alignment_name}.aln"'
     for key in parameters.keys():
         cwAln += f' -{key}="{parameters[key]}"'
-    try:
-        os.remove('aligned.aln')
-    except Exception as E:
-        pass
     os.system(cwAln)
     time.sleep(0.5)
     wait_until(aligner_done, 100000000, f"{output_alignment_name}.aln", period=0.1)
