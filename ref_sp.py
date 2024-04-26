@@ -13,15 +13,9 @@ def reference_based_SP_Score(ref_alignment_name, alignment_name):
 
     output: A decimal between 0 and 1.
     '''
-    ref_aln = seq_file_reader(ref_alignment_name)
-    ref_alignment = []
-    for rec in ref_aln:
-        ref_alignment.append(str(rec.seq))
+    ref_alignment = seq_file_reader(ref_alignment_name)
 
-    aln = seq_file_reader(alignment_name)
-    alignment = []
-    for rec in aln:
-        alignment.append(str(rec.seq))
+    alignment = seq_file_reader(alignment_name)
 
     if len(ref_alignment) != len(alignment):
         print('Have different number of rows!!!')

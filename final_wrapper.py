@@ -25,8 +25,11 @@ def run_clustal_test(file1, ref_alignment_path):
     f_scoring.run_aligner(file1, path_to_aligner, params, 't1')
     f_scoring.run_aligner(file1, path_to_aligner, {}, 't2')
     opt, reg = reference_based_SP_Score(ref_alignment_path, 't1.aln'), reference_based_SP_Score(ref_alignment_path, 't2.aln')
-    os.remove('t1.aln')
-    os.remove('t2.aln')
+    try:
+        os.remove('t1.aln')
+        os.remove('t2.aln')
+    except:
+        pass
     return opt, reg
 
 def main():
