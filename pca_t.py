@@ -23,7 +23,7 @@ def read_data_and_extract_features(folder_path):
                 labels.append(label_path.split("/")[-1])  # Use index as label instead of string
 
     # Pickle the extracted data
-    with open('extracted_data.pkl', 'wb') as f:
+    with open('final_extracted_data.pkl', 'wb') as f:
         pickle.dump((data, labels), f)
 
     return data, labels
@@ -31,7 +31,7 @@ def read_data_and_extract_features(folder_path):
 
 def load_extracted_data():
     # Unpickle the extracted data
-    with open('extracted_data.pkl', 'rb') as f:
+    with open('final_extracted_data.pkl', 'rb') as f:
         data, labels = pickle.load(f)
     return data, labels
 
@@ -59,7 +59,7 @@ def find_nearest_neighbors(input_data, data, n_neighbors=5):
 
 def main(input_folder_path, input_sequence):
     # Check if extracted data has been pickled
-    if os.path.exists('extracted_data.pkl'):
+    if os.path.exists('final_extracted_data.pkl'):
         data, labels = load_extracted_data()
     else:
         # Read data and extract features
@@ -92,6 +92,6 @@ def main(input_folder_path, input_sequence):
 
 # Example usage
 input_folder_path = "./PCA Seqs"
-input_sequence = "./sup_002.fasta"
+input_sequence = "./PCA Seqs/ox_seqs/12s103"
 nearest_labels = main(input_folder_path, input_sequence)
 print("Nearest neighbor labels:", nearest_labels)
