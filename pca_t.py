@@ -72,20 +72,20 @@ def main(input_folder_path, input_sequence):
     nearest_neighbor_indices, reduced_data, input_reduced = find_nearest_neighbors(input_features, data)
     nearest_neighbor_labels = [labels[i] for i in nearest_neighbor_indices]
 
-    # Plot PCA
-    plt.figure(figsize=(8, 6))
-    for i, label in enumerate(set(labels)):
-        indices = np.where(np.array(labels) == label)
-        plt.scatter(reduced_data[indices, 0], reduced_data[indices, 1], label=f'Label {label}', alpha=0.7)
-    plt.scatter(reduced_data[nearest_neighbor_indices, 0], reduced_data[nearest_neighbor_indices, 1],
-                marker='x', color='red', label='Nearest Neighbors')
-    plt.scatter(input_reduced[0, 0], input_reduced[0, 1], marker='o', color='black', label='Input Sequence')
-    plt.xlabel('Principal Component 1')
-    plt.ylabel('Principal Component 2')
-    plt.title('PCA Visualization')
-    plt.legend()
-    plt.grid(True)
-    plt.show()
+    # # Plot PCA
+    # plt.figure(figsize=(8, 6))
+    # for i, label in enumerate(set(labels)):
+    #     indices = np.where(np.array(labels) == label)
+    #     plt.scatter(reduced_data[indices, 0], reduced_data[indices, 1], label=f'Label {label}', alpha=0.7)
+    # plt.scatter(reduced_data[nearest_neighbor_indices, 0], reduced_data[nearest_neighbor_indices, 1],
+    #             marker='x', color='red', label='Nearest Neighbors')
+    # plt.scatter(input_reduced[0, 0], input_reduced[0, 1], marker='o', color='black', label='Input Sequence')
+    # plt.xlabel('Principal Component 1')
+    # plt.ylabel('Principal Component 2')
+    # plt.title('PCA Visualization')
+    # plt.legend()
+    # plt.grid(True)
+    # plt.show()
 
     return nearest_neighbor_labels
 

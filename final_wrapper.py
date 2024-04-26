@@ -1,4 +1,4 @@
-import compare_characteristics
+import pca_t
 import f_scoring
 import argparse
 from ref_sp import reference_based_SP_Score
@@ -12,7 +12,7 @@ path_to_aligner = r'..\ClustalW2\clustalw2.exe'
 
 
 def run_clustal(file, output_name):
-    closest_label = compare_characteristics.closest_label(file)
+    closest_label = pca_t.closest_label(file)
     params = opt_param_dict[closest_label]
     f_scoring.run_aligner(file, path_to_aligner, params, output_name)
 
@@ -20,7 +20,7 @@ def run_clustal(file, output_name):
 
 
 def run_clustal_test(file1, ref_alignment_path):
-    closest_label = compare_characteristics.closest_label(file1)
+    closest_label = pca_t.closest_label(file1)
     params = opt_param_dict[closest_label]
     f_scoring.run_aligner(file1, path_to_aligner, params, 't1')
     f_scoring.run_aligner(file1, path_to_aligner, {}, 't2')
