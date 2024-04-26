@@ -60,5 +60,5 @@ def closest_label(input_sequence):
 # Example usage
 input_folder_path = "./PCA Seqs"
 input_sequence = "./sup_002.fasta"
-nearest_label = closest_label( input_sequence)
+nearest_label = closest_label(input_sequence)
 print("Nearest neighbor label:", nearest_label)

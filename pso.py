@@ -5,7 +5,6 @@ import time
 from f_scoring import run_aligner
 
 
-
 def wait_until(somepredicate, timeout, output_file, period=0.25):
     mustend = time.time() + timeout
     while time.time() < mustend:
@@ -68,15 +67,16 @@ def optimize_clustal(path_to_aligner, path_to_sequence_file, ref_alignment, logn
     print(f"covid params: {optimize_params(final_output_name)}")
 
 
-
 def run_pso(path_to_aligner, path_to_sequence_file_list, ref_alignment_list, log_name_list, final_output_name_list):
     for i in range(len(path_to_sequence_file_list)):
-        optimize_clustal(path_to_aligner, path_to_sequence_file_list[i], ref_alignment_list[i], log_name_list[i], final_output_name_list[i])
+        optimize_clustal(path_to_aligner, path_to_sequence_file_list[i], ref_alignment_list[i], log_name_list[i],
+                         final_output_name_list[i])
 
 
 path_to_aligner = r'..\ClustalW2\clustalw2.exe'
 path_to_sequence_file_list = ['"1a0cA_1a0dA.fasta"', '"1aab_ref1.fasta"', '"BB11001.fasta"', '"sup_002.fasta"']
-ref_alignment_list = ['1a0cA_1a0dA_ref_align.fasta', '1aab_ref1_ref_align.fasta', 'BB11001_ref_align.fasta', 'sup_002_ref_align.fasta'] # shouldn't include quotes
+ref_alignment_list = ['1a0cA_1a0dA_ref_align.fasta', '1aab_ref1_ref_align.fasta', 'BB11001_ref_align.fasta',
+                      'sup_002_ref_align.fasta']  # shouldn't include quotes
 log_name_list = ["1a0cA_1a0dA_log", "1aab_ref1_log", "BB11001_log", "sup_002_log"]
 final_output_name_list = ["1a0cA_1a0dA_final", "1aab_ref1_final", "BB11001_final", "sup_002_final"]
 iter_ = 0
@@ -85,5 +85,3 @@ best_params = None
 best_params_score = None
 
 run_pso(path_to_aligner, path_to_sequence_file_list, ref_alignment_list, log_name_list, final_output_name_list)
-
-

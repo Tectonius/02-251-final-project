@@ -56,14 +56,12 @@ def find_nearest_neighbors(input_data, data, n_neighbors=5):
 
     return nearest_neighbor_indices, reduced_data, input_reduced
 
+def most_common(lst):
+    return max(set(lst), key=lst.count)
 
-def main(input_folder_path, input_sequence):
+def closest_label(input_sequence):
     # Check if extracted data has been pickled
-    if os.path.exists('final_extracted_data.pkl'):
-        data, labels = load_extracted_data()
-    else:
-        # Read data and extract features
-        data, labels = read_data_and_extract_features(input_folder_path)
+    data, labels = load_extracted_data()
 
     # Process input sequence using Characteristicframework.py
     input_features = extract_characteristics(input_sequence)
@@ -87,11 +85,11 @@ def main(input_folder_path, input_sequence):
     # plt.grid(True)
     # plt.show()
 
-    return nearest_neighbor_labels
+    return most_common(nearest_neighbor_labels)
 
 
 # Example usage
-input_folder_path = "./PCA Seqs"
-input_sequence = "./PCA Seqs/ox_seqs/12s103"
-nearest_labels = main(input_folder_path, input_sequence)
-print("Nearest neighbor labels:", nearest_labels)
+# input_folder_path = "./PCA Seqs"
+# input_sequence = "./PCA Seqs/ox_seqs/12s103"
+# nearest_labels = closest_label(input_folder_path, input_sequence)
+# print("Nearest neighbor labels:", nearest_labels)

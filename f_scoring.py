@@ -66,8 +66,11 @@ def f_scoring(path_to_sequence_file, path_to_aligner, params, ref_alignment_path
 
 def run_aligner(path_to_sequence_file, path_to_aligner, params, output_alignment_name):
     # gapopen, gapext, maxdiv, transweight
-    parameters = {'gapopen': params[0], 'gapext': params[1], 'maxdiv': params[2], 'transweight': params[3]}
-    cwAln = path_to_aligner + ' -infile=' + path_to_sequence_file
+    if params != {}:
+        parameters = {'gapopen': params[0], 'gapext': params[1], 'maxdiv': params[2], 'transweight': params[3]}
+    else:
+        parameters = params
+    cwAln = path_to_aligner + ' -infile="' + path_to_sequence_file + '"'
     cwAln += f' -outfile="{output_alignment_name}.aln"'
     for key in parameters.keys():
         cwAln += f' -{key}="{parameters[key]}"'
